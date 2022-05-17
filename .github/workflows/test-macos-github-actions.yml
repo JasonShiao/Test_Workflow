@@ -3,6 +3,7 @@ on:
   push:
     branches-ignore:
       - 'main'
+      - 'test'
 jobs:
   setup-macos-build-environment:
     runs-on: macos-10.15

@@ -6,4 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: brew info gfortran
-      - run: which gfortran
+      - run: ls /usr/local/Cellar/gcc/11.3.0/bin
+      - run: |
+        ln -s /usr/local/Cellar/gcc/11.3.0/bin/gfortran /usr/local/bin/gfortran
+        which gfortran
