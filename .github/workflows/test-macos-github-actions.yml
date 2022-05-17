@@ -5,7 +5,8 @@ jobs:
     runs-on: macos-10.15
     steps:
       # checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
-      - uses: actions/checkout@v3
+      - name: Checkout
+        - uses: actions/checkout@v3
       # Determine xcode version
       - name: Setup XCode
         - uses: maxim-lobanov/setup-xcode@v1
