@@ -11,9 +11,12 @@ jobs:
         with:
           xcode-version: '11.2.1'
       # setup opencv
-      - uses: Dovyski/setup-opencv-action@v1
-        with:
-          opencv-version: '4.5.5'
+      - run: brew install opencv
+      - run: brew info gcc
+      - run: brew info openblas
+      #- uses: Dovyski/setup-opencv-action@v1
+      #  with:
+      #    opencv-version: '4.5.5'
       # setup qt
       - uses: jurplel/install-qt-action@v2.14.0
         with:
