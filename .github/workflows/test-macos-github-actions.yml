@@ -31,7 +31,7 @@ jobs:
           git clone https://github.com/xianyi/OpenBLAS.git ${{ github.workspace }}/dev/openBLAS
           cd ${{ github.workspace }}/dev/OpenBLAS
           make -j4
-          make install
+          sudo make install
       - run: |
           cd ${{ github.workspace }}/dev/
           mkdir ${{ github.workspace }}/dev/opencv
