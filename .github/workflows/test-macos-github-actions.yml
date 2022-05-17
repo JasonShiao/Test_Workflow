@@ -7,46 +7,49 @@ jobs:
       # checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
       - uses: actions/checkout@v3
       # Determine xcode version
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '11.2.1'
-      # setup opencv
-      - run: mkdir ${{ github.workspace }}/dev/
-      #- run: brew install opencv
-      - run: brew install pkg-config
-      - run: brew install ceres-solver
-      - run: brew install eigen
-      - run: brew install ffmpeg@4
-      - run: brew install glog
-      - run: brew install harfbuzz
-      - run: brew install numpy
-      - run: brew install protobuf
-      - run: brew install tbb
-      - run: brew install vtk
-      - run: cd ${{ github.workspace }}/dev/
-      - run: git clone https://github.com/xianyi/OpenBLAS.git
-      - run: ls
-      #- run: cd ${{ github.workspace }}/dev/OpenBLAS
-      #- run: make -j4
-      #- run: make install
-      - run: mkdir ${{ github.workspace }}/dev/opencv
-      - run: cd ${{ github.workspace }}/dev/opencv
-      - run: git clone https://github.com/opencv/opencv.git
-      - run: git clone https://github.com/opencv/opencv_contrib.git
-      - run: mkdir build_opencv
-      - run: cd build_opencv
-      - run: opencv_cmake_args="-DCMAKE_OSX_DEPLOYMENT_TARGET= -DBUILD_JASPER=OFF -DBUILD_JPEG=OFF -DBUILD_OPENEXR=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_PNG=OFF -DBUILD_PROTOBUF=OFF -DBUILD_TESTS=OFF -DBUILD_TIFF=OFF -DBUILD_WEBP=OFF -DBUILD_ZLIB=OFF -DBUILD_opencv_hdf=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_text=ON -DOPENCV_ENABLE_NONFREE=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DPROTOBUF_UPDATE_FILES=ON -DWITH_1394=OFF -DWITH_CUDA=OFF -DWITH_EIGEN=ON -DWITH_FFMPEG=ON -DWITH_GPHOTO2=OFF -DWITH_GSTREAMER=OFF -DWITH_JASPER=OFF -DWITH_OPENEXR=ON -DWITH_OPENGL=OFF -DWITH_QT=OFF -DWITH_TBB=ON -DWITH_VTK=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=ON -DPYTHON3_EXECUTABLE=/usr/local/opt/python@3.9/bin/python3 -DENABLE_AVX=OFF -DENABLE_AVX2=OFF -DENABLE_SSE41=OFF -DENABLE_SSE42=OFF"
-      - run: echo ${opencv_cmake_args}
-      - run: cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=${{ github.workspace }}/dev/opencv/opencv_contrib/modules ${{ github.workspace }}/dev/opencv/opencv
-      - run: make
-      - run: make install
-      # setup qt
-      - uses: jurplel/install-qt-action@v2.14.0
-        with:
-          dir: ${{ github.workspace }}/dev/ # optional
-          version: 6.2.4 # optional, default is 5.15.2
-          host: mac # optional
-          target: desktop # optional, default is desktop
+      - name: Setup XCode
+        - uses: maxim-lobanov/setup-xcode@v1
+          with:
+            xcode-version: '11.2.1'
+      - name: Setup OpenCV
+        - run: mkdir ${{ github.workspace }}/dev/
+        #- run: brew install opencv
+        - run: brew install pkg-config
+        - run: brew install ceres-solver
+        - run: brew install eigen
+        - run: brew install ffmpeg@4
+        - run: brew install glog
+        - run: brew install harfbuzz
+        - run: brew install numpy
+        - run: brew install protobuf
+        - run: brew install tbb
+        - run: brew install vtk
+        - run: |
+            cd ${{ github.workspace }}/dev/
+            git clone https://github.com/xianyi/OpenBLAS.git ${{ github.workspace }}/dev/openBLAS
+            cd ${{ github.workspace }}/dev/OpenBLAS
+            make -j4
+            make install
+        - run: |
+            cd ${{ github.workspace }}/dev/
+            mkdir ${{ github.workspace }}/dev/opencv
+            cd ${{ github.workspace }}/dev/opencv
+            git clone https://github.com/opencv/opencv.git
+            git clone https://github.com/opencv/opencv_contrib.git
+            mkdir build_opencv
+            cd build_opencv
+            opencv_cmake_args="-DCMAKE_OSX_DEPLOYMENT_TARGET= -DBUILD_JASPER=OFF -DBUILD_JPEG=OFF -DBUILD_OPENEXR=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_PNG=OFF -DBUILD_PROTOBUF=OFF -DBUILD_TESTS=OFF -DBUILD_TIFF=OFF -DBUILD_WEBP=OFF -DBUILD_ZLIB=OFF -DBUILD_opencv_hdf=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_text=ON -DOPENCV_ENABLE_NONFREE=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DPROTOBUF_UPDATE_FILES=ON -DWITH_1394=OFF -DWITH_CUDA=OFF -DWITH_EIGEN=ON -DWITH_FFMPEG=ON -DWITH_GPHOTO2=OFF -DWITH_GSTREAMER=OFF -DWITH_JASPER=OFF -DWITH_OPENEXR=ON -DWITH_OPENGL=OFF -DWITH_QT=OFF -DWITH_TBB=ON -DWITH_VTK=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=ON -DPYTHON3_EXECUTABLE=/usr/local/opt/python@3.9/bin/python3 -DENABLE_AVX=OFF -DENABLE_AVX2=OFF -DENABLE_SSE41=OFF -DENABLE_SSE42=OFF"
+            echo ${opencv_cmake_args}
+            cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=${{ github.workspace }}/dev/opencv/opencv_contrib/modules ${{ github.workspace }}/dev/opencv/opencv
+            make
+            make install
+      - name: Setup QT
+        - uses: jurplel/install-qt-action@v2.14.0
+          with:
+            dir: ${{ github.workspace }}/dev/ # optional
+            version: 6.2.4 # optional, default is 5.15.2
+            host: mac # optional
+            target: desktop # optional, default is desktop
       #- uses: actions/checkout@v3
       #- uses: actions/setup-node@v3
       #  with:
