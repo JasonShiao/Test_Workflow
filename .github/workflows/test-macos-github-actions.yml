@@ -1,7 +1,7 @@
 name: learn-github-actions
 on: 
   push:
-    branches-ignore:
+    branches:
       - 'main'
       - 'test'
 jobs:
@@ -27,6 +27,7 @@ jobs:
       - run: brew install vtk
       - run: |
           cd ${{ github.workspace }}/dev/
+          ln -s /usr/local/Cellar/gcc/11.3.0/bin/gfortran /usr/local/bin/gfortran
           git clone https://github.com/xianyi/OpenBLAS.git ${{ github.workspace }}/dev/openBLAS
           cd ${{ github.workspace }}/dev/OpenBLAS
           make -j4
