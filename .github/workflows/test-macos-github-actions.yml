@@ -4,11 +4,10 @@ jobs:
   setup-macos-build-environment:
     runs-on: macos-10.15
     steps:
-      # checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
       - name: Checkout
         - uses: actions/checkout@v3
-      # Determine xcode version
       - name: Setup XCode
+        # Determine xcode version
         - uses: maxim-lobanov/setup-xcode@v1
           with:
             xcode-version: '11.2.1'
