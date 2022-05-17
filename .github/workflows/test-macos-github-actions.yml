@@ -4,12 +4,17 @@ jobs:
   setup-macos-build-environment:
     runs-on: macos-10.15
     steps:
-      #- run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      - run: brew list
+      # checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+      - uses: actions/checkout@v3
+      # Determine xcode version
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '11.2.1'
-      - run: xcodebuild -version
+      # setup opencv
+      - uses: Dovyski/setup-opencv-action@v1
+        with:
+          opencv-version: '4.5.5'
+      # setup qt
       - uses: jurplel/install-qt-action@v2.14.0
         with:
           dir: ${{ github.workspace }}/dev/ # optional
