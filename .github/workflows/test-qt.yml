@@ -12,36 +12,6 @@ jobs:
         with:
           xcode-version: '11.2.1'
       - run: mkdir $RUNNER_WORKSPACE/dev
-      - run: brew install pkg-config
-      - run: brew install ceres-solver
-      - run: brew install eigen
-      - run: brew install ffmpeg@4
-      - run: brew install glog
-      - run: brew install harfbuzz
-      - run: brew install numpy
-      - run: brew install protobuf
-      - run: brew install tbb
-      - run: brew install vtk
-      - run: |
-          cd $RUNNER_WORKSPACE/dev/
-          ln -s /usr/local/Cellar/gcc/11.3.0/bin/gfortran /usr/local/bin/gfortran
-          git clone https://github.com/xianyi/OpenBLAS.git $RUNNER_WORKSPACE/dev/openBLAS
-          cd OpenBLAS
-          make -j4
-          sudo make install
-      - run: |
-          cd $RUNNER_WORKSPACE/dev/
-          mkdir opencv
-          cd opencv
-          git clone https://github.com/opencv/opencv.git
-          git clone https://github.com/opencv/opencv_contrib.git
-          mkdir build_opencv
-          cd build_opencv
-          opencv_cmake_args="-DCMAKE_OSX_DEPLOYMENT_TARGET= -DBUILD_JASPER=OFF -DBUILD_JPEG=OFF -DBUILD_OPENEXR=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_PNG=OFF -DBUILD_PROTOBUF=OFF -DBUILD_TESTS=OFF -DBUILD_TIFF=OFF -DBUILD_WEBP=OFF -DBUILD_ZLIB=OFF -DBUILD_opencv_hdf=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_text=ON -DOPENCV_ENABLE_NONFREE=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DPROTOBUF_UPDATE_FILES=ON -DWITH_1394=OFF -DWITH_CUDA=OFF -DWITH_EIGEN=ON -DWITH_FFMPEG=ON -DWITH_GPHOTO2=OFF -DWITH_GSTREAMER=OFF -DWITH_JASPER=OFF -DWITH_OPENEXR=ON -DWITH_OPENGL=OFF -DWITH_QT=OFF -DWITH_TBB=ON -DWITH_VTK=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=ON -DPYTHON3_EXECUTABLE=/usr/local/opt/python@3.9/bin/python3 -DENABLE_AVX=OFF -DENABLE_AVX2=OFF -DENABLE_SSE41=OFF -DENABLE_SSE42=OFF"
-          echo ${opencv_cmake_args}
-          cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=$RUNNER_WORKSPACE/dev/opencv/opencv_contrib/modules $RUNNER_WORKSPACE/dev/opencv/opencv
-          make
-          make install
       - run: brew install boost
       - uses: jurplel/install-qt-action@v2.14.0
         with:
@@ -60,4 +30,13 @@ jobs:
           cd build
           make qmake_all
           make -j10
+      - run: |
+          cd build
+          $RUNNER_WORKSPACE/Qt/6.2.4/macos/bin/macdeployqt TestQt.app -dmg
+          tree .
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/TestQt.dmg
 
