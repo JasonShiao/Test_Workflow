@@ -11,5 +11,6 @@ jobs:
         with:
           path: src
       - run: ls -al ${{ github.worksapce }}
+      - run: ls -al src
       - run: ls -al ~
       - run: ls -al .
