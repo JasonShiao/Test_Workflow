@@ -1,0 +1,18 @@
+name: checkout-path
+on: 
+  push:
+    branches:
+      - 'path'
+jobs:
+  setup-macos-build-environment:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: src
+      - run:
+        ls -al ${{ github.worksapce }}
+      - run:
+        ls -al ~
+      - run:
+        ls -al .

@@ -59,6 +59,7 @@ jobs:
           version: 6.2.4 # optional, default is 5.15.2
           host: mac # optional
           target: desktop # optional, default is desktop
+      - run: brew install libxml2
       #- uses: actions/checkout@v3
       #- uses: actions/setup-node@v3
       #  with:
