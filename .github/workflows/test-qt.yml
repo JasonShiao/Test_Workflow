@@ -25,7 +25,7 @@ jobs:
           mkdir build
           cd build
           $RUNNER_WORKSPACE/Qt/6.2.4/macos/bin/qmake6 -d ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler
-      -run: |
+      - run: |
           cd build
           make qmake_all
           make -j10
