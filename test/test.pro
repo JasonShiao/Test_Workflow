@@ -7,7 +7,7 @@ CONFIG += c++17
 
 #LIBS += -L"/usr/local/lib/" -lopencv_core
 #LIBS += -L"/usr/local/lib/" -lopencv_imgproc
-# OpenCV from Macport
+# OpenCV from Macport 
 #LIBS += -L"/opt/local/lib/opencv4/" -lopencv_core
 #LIBS += -L"/opt/local/lib/opencv4/" -lopencv_imgproc
 LIBS += -L"/usr/local/lib/" -lboost_thread-mt
