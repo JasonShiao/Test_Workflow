@@ -1,0 +1,20 @@
+name: test-win64-build
+on: 
+  push:
+    branches:
+      - 'win64'
+jobs:
+  setup-win64-build-environment:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - choco install tree
+      # Boost library
+      - run: choco install boost-msvc-14.3
+      # OpenCV Library
+      - run: choco install opencv
+      - run: choco install wget
+      - run: wget http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
+      - run: dir
+      - run: ls -al
+      - run: tree
