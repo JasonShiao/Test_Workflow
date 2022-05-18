@@ -17,7 +17,7 @@ jobs:
       - run: |
           cd ${{ github.workspace }}/dev/
           curl http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz -o potrace-1.16.tar.gz
-          tar -xvf archive.tar.gz
+          tar -xvf potrace-1.16.tar.gz
           cd potrace-1.16
           ./configure --with-libpotrace
           make install
