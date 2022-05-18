@@ -14,6 +14,7 @@ jobs:
         with:
           xcode-version: '11.2.1'
       - run: mkdir ${{ github.workspace }}/dev/
+      # Potrace library
       - run: |
           cd ${{ github.workspace }}/dev/
           curl http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz -o potrace-1.16.tar.gz
