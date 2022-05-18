@@ -13,19 +13,19 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '11.2.1'
-      - run: mkdir $HOME/dev/
+      - run: mkdir dev
       - uses: jurplel/install-qt-action@v2.14.0
         with:
-          dir: $HOME/dev/ # optional
+          dir: dev # optional
           version: 6.2.4 # optional, default is 5.15.2
           host: mac # optional
           target: desktop # optional, default is desktop
       - run: |
           brew install tree
-          tree $HOME/dev/
+          tree dev/
       - run: |
           tree ${{ github.workspace }}
-          $HOME/dev/Qt/6.2.4/macos/bin/qmake ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler && make qmake_all
+          dev/Qt/6.2.4/macos/bin/qmake ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler && make qmake_all
           mkdir ~/build/
           make -j10 in ~/build/
       #- uses: actions/checkout@v3
