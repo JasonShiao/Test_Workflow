@@ -1,8 +1,7 @@
 name: test-qt-build
-on: 
-  push:
-    branches:
-      - 'qt'
+
+on: push
+
 jobs:
   test-build-qt-project:
     runs-on: macos-10.15
