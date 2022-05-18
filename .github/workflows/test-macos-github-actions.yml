@@ -13,10 +13,10 @@ jobs:
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '11.2.1'
-      - run: mkdir ${{ github.workspace }}/dev/
+      - run: mkdir ~/dev/
       # Potrace library
       - run: |
-          cd ${{ github.workspace }}/dev/
+          cd ~/dev/
           curl http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz -o potrace-1.16.tar.gz
           tar -xvf potrace-1.16.tar.gz
           cd potrace-1.16
@@ -34,28 +34,28 @@ jobs:
       - run: brew install tbb
       - run: brew install vtk
       - run: |
-          cd ${{ github.workspace }}/dev/
+          cd ~/dev/
           ln -s /usr/local/Cellar/gcc/11.3.0/bin/gfortran /usr/local/bin/gfortran
-          git clone https://github.com/xianyi/OpenBLAS.git ${{ github.workspace }}/dev/openBLAS
-          cd ${{ github.workspace }}/dev/OpenBLAS
+          git clone https://github.com/xianyi/OpenBLAS.git ~/dev/openBLAS
+          cd OpenBLAS
           make -j4
           sudo make install
       - run: |
-          cd ${{ github.workspace }}/dev/
-          mkdir ${{ github.workspace }}/dev/opencv
-          cd ${{ github.workspace }}/dev/opencv
+          cd ~/dev/
+          mkdir opencv
+          cd opencv
           git clone https://github.com/opencv/opencv.git
           git clone https://github.com/opencv/opencv_contrib.git
           mkdir build_opencv
           cd build_opencv
           opencv_cmake_args="-DCMAKE_OSX_DEPLOYMENT_TARGET= -DBUILD_JASPER=OFF -DBUILD_JPEG=OFF -DBUILD_OPENEXR=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_PNG=OFF -DBUILD_PROTOBUF=OFF -DBUILD_TESTS=OFF -DBUILD_TIFF=OFF -DBUILD_WEBP=OFF -DBUILD_ZLIB=OFF -DBUILD_opencv_hdf=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_text=ON -DOPENCV_ENABLE_NONFREE=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DPROTOBUF_UPDATE_FILES=ON -DWITH_1394=OFF -DWITH_CUDA=OFF -DWITH_EIGEN=ON -DWITH_FFMPEG=ON -DWITH_GPHOTO2=OFF -DWITH_GSTREAMER=OFF -DWITH_JASPER=OFF -DWITH_OPENEXR=ON -DWITH_OPENGL=OFF -DWITH_QT=OFF -DWITH_TBB=ON -DWITH_VTK=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=ON -DPYTHON3_EXECUTABLE=/usr/local/opt/python@3.9/bin/python3 -DENABLE_AVX=OFF -DENABLE_AVX2=OFF -DENABLE_SSE41=OFF -DENABLE_SSE42=OFF"
           echo ${opencv_cmake_args}
-          cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=${{ github.workspace }}/dev/opencv/opencv_contrib/modules ${{ github.workspace }}/dev/opencv/opencv
+          cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=~/dev/opencv/opencv_contrib/modules ~/dev/opencv/opencv
           make
           make install
       - uses: jurplel/install-qt-action@v2.14.0
         with:
-          dir: ${{ github.workspace }}/dev/ # optional
+          dir: ~/dev/ # optional
           version: 6.2.4 # optional, default is 5.15.2
           host: mac # optional
           target: desktop # optional, default is desktop
