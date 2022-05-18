@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - choco install tree
+      - run: choco install tree
       # Boost library
       - run: choco install boost-msvc-14.3
       # OpenCV Library
