@@ -14,6 +14,13 @@ jobs:
         with:
           xcode-version: '11.2.1'
       - run: mkdir ${{ github.workspace }}/dev/
+      - run: |
+          curl http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz -o ${{ github.workspace }}/dev/potrac-1.16.tar.gz
+          cd mkdir ${{ github.workspace }}/dev/
+          tar -xvf archive.tar.gz
+          cd potrace-1.16
+          ./configure --with-libpotrace
+          make install
       #- run: brew install opencv
       - run: brew install pkg-config
       - run: brew install ceres-solver
