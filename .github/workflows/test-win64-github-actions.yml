@@ -8,6 +8,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Cache Chocolatey Dependencies
+        uses: actions/cache@v3
+        with:
+          path: C:\ProgramData\chocolatey\lib
+          key: choco-cache-${{ hashFiles('**/dependencies.config') }}
+          restore-keys: |
+            choco-cache-
       - run: choco install tree
       # Boost library
       - run: choco install boost-msvc-14.3
