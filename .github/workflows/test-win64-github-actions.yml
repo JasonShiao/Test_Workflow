@@ -21,14 +21,10 @@ jobs:
       # OpenCV Library
       - run: choco install opencv
       - run: dir
-      - run: echo $PATH%
+      - run: echo %PATH%
       - name: Build Potrace Library
         run: |
           choco install wget
           wget http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
           tar -xvf potrace-1.16.tar.gz
-      - run: tree
-      - shell: msys2 {0}
-        run: |
-          ls -al
-          cd potrace-1.16
+      - run: tree C:\ProgramData\chocolatey
