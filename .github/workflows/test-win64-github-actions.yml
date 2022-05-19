@@ -28,6 +28,7 @@ jobs:
       - name: Build Potrace Library
         run: |
           choco install wget
-          wget http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
-          tar -xvf potrace-1.16.tar.gz
+          $env:path
+          wget.exe http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
+          tar.exe -xvf potrace-1.16.tar.gz
       - run: tree C:\ProgramData\chocolatey
