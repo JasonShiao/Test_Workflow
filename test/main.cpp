@@ -2,7 +2,7 @@
 
 #include <QApplication>
 #include <QImage>
-//#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <QDebug>
 
 #include <boost/thread.hpp>
@@ -14,7 +14,6 @@
  *                 Without using copy, the data memory is shared between QImage and Mat and 
  *                 it could cause a crash (invalid memory access)
  */
-/*
 QImage cvMatToQImage (const cv::Mat &inMat) {
   switch (inMat.type()) {
     case CV_8UC4:
@@ -66,7 +65,6 @@ cv::Mat QImageToCvMat(const QImage &inImage) {
 
   return cv::Mat();
 }
-*/
 
 void wait(int seconds)
 {

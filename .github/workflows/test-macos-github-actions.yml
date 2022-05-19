@@ -53,16 +53,35 @@ jobs:
           cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=~/dev/opencv/opencv_contrib/modules ~/dev/opencv/opencv
           make
           make install
-      - uses: jurplel/install-qt-action@v2.14.0
-        with:
-          dir: ~/dev/ # optional
-          version: 6.2.4 # optional, default is 5.15.2
-          host: mac # optional
-          target: desktop # optional, default is desktop
-      - run: brew install libxml2
-      #- uses: actions/checkout@v3
-      #- uses: actions/setup-node@v3
+      #- uses: jurplel/install-qt-action@v2.14.0
       #  with:
-      #    node-version: '14'
-      #- run: npm install -g bats
-      #- run: bats -v
+      #    dir: ~/dev/ # optional
+      #    version: 6.2.4 # optional, default is 5.15.2
+      #    host: mac # optional
+      #    target: desktop # optional, default is desktop
+      - name: Install Qt 6.2.4
+        run: |
+          brew install p7zip
+          python3 -m pip install setuptools wheel
+          python3 -m pip install py7zr==0.16.1
+          python3 -m pip install aqtinstall==2.1.0
+          python3 -m aqt install-qt  mac desktop 6.2.4 -m qtserialport qtwebsockets debug_info -O ${{ github.workspace }}/Qt
+
+      - run: brew install libxml2
+      - run: |
+          mkdir build
+          cd build
+          $RUNNER_WORKSPACE/Qt/6.2.4/macos/bin/qmake6 ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler
+      - run: |
+          cd build
+          make qmake_all
+          make -j10
+      - run: |
+          cd build
+          $RUNNER_WORKSPACE/Qt/6.2.4/macos/bin/macdeployqt TestQt.app -dmg --verbose=2
+          tree .
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        #if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: build/TestQt.dmg
