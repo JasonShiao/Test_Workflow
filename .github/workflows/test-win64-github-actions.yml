@@ -21,7 +21,10 @@ jobs:
       # OpenCV Library
       - run: choco install opencv
       - run: dir
-      - run: echo %PATH%
+      - run: |
+        $env:path
+      - shell: python
+        print("Hello world")
       - name: Build Potrace Library
         run: |
           choco install wget
