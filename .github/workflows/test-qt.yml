@@ -26,7 +26,7 @@ jobs:
           python3 -m pip install setuptools wheel
           python3 -m pip install py7zr==0.16.1
           python3 -m pip install aqtinstall==2.1.0
-          python3 -m aqt install 6.2.4 mac desktop -m qtserialport qtwebsockets debug_info -O ${{ github.workspace }}/Qt
+          python3 -m aqt install-qt  mac desktop 6.2.4 -m qtserialport qtwebsockets debug_info -O ${{ github.workspace }}/Qt
       - run: |
           brew install tree
           tree ${{ github.workspace }}
