@@ -13,8 +13,15 @@ jobs:
       - run: choco install boost-msvc-14.3
       # OpenCV Library
       - run: choco install opencv
-      - run: choco install wget
-      - run: wget http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
       - run: dir
-      - run: ls -al
+      - run: path
+      - name: Build Potrace Library
+        run: |
+          choco install wget
+          wget http://potrace.sourceforge.net/download/1.16/potrace-1.16.tar.gz
+          tar -xvf potrace-1.16.tar.gz
       - run: tree
+      - shell: msys2 {0}
+        run: |
+          ls -al
+          cd potrace-1.16
