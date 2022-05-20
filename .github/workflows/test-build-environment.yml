@@ -123,7 +123,7 @@ jobs:
           cd build_opencv
           opencv_cmake_args="-DCMAKE_OSX_DEPLOYMENT_TARGET= -DBUILD_JASPER=OFF -DBUILD_JPEG=OFF -DBUILD_OPENEXR=OFF -DBUILD_PERF_TESTS=OFF -DBUILD_PNG=OFF -DBUILD_PROTOBUF=OFF -DBUILD_TESTS=OFF -DBUILD_TIFF=OFF -DBUILD_WEBP=OFF -DBUILD_ZLIB=OFF -DBUILD_opencv_hdf=OFF -DBUILD_opencv_java=OFF -DBUILD_opencv_text=ON -DOPENCV_ENABLE_NONFREE=ON -DOPENCV_GENERATE_PKGCONFIG=ON -DPROTOBUF_UPDATE_FILES=ON -DWITH_1394=OFF -DWITH_CUDA=OFF -DWITH_EIGEN=ON -DWITH_FFMPEG=ON -DWITH_GPHOTO2=OFF -DWITH_GSTREAMER=OFF -DWITH_JASPER=OFF -DWITH_OPENEXR=ON -DWITH_OPENGL=OFF -DWITH_QT=OFF -DWITH_TBB=ON -DWITH_VTK=ON -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=ON -DPYTHON3_EXECUTABLE=/usr/local/opt/python@3.9/bin/python3 -DENABLE_AVX=OFF -DENABLE_AVX2=OFF -DENABLE_SSE41=OFF -DENABLE_SSE42=OFF"
           echo ${opencv_cmake_args}
-          cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=$RUNNER_WORKSPACE/dev/opencv/opencv_contrib/modules dev/opencv/opencv
+          cmake ${opencv_cmake_args} -DOPENCV_EXTRA_MODULES_PATH=${{ github.workspace }}/dev/opencv/opencv_contrib/modules ${{ github.workspace }}/dev/opencv/opencv
           make
       - name: Install OpenCV
         run: |
