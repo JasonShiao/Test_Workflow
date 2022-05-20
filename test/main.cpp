@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 
     boost::thread t{thread};
     QImage test_qimage{100, 100, QImage::Format_Grayscale8	};
-    cv::Mat image = QImageToCvMat();
+    cv::Mat image = QImageToCvMat(test_qimage);
 
     return a.exec();
 }
