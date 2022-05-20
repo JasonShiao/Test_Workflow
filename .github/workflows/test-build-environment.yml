@@ -145,7 +145,7 @@ jobs:
           cd build
           $RUNNER_WORKSPACE/Qt/6.2.4/macos/bin/macdeployqt TestQt.app -dmg -verbose=2
           tree .
-      
+      - run: brew list
       #- name: Create Github Release
       #  uses: softprops/action-gh-release@v1
       #  #if: startsWith(github.ref, 'refs/tags/')
