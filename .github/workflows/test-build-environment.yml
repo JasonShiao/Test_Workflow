@@ -55,7 +55,7 @@ jobs:
       # NOTE: boost is installed as dependencies of vtk
         run: | 
           brew install pkg-config
-          brew install ceres-solver
+          # brew install ceres-solver
           brew install eigen
           brew install ffmpeg@4
           brew install glog
@@ -86,6 +86,22 @@ jobs:
         run: |
           cd dev/OpenBLAS
           sudo make install
+      
+      - name: Install ceres-solver
+        run: |
+          cd dev
+          git clone https://ceres-solver.googlesource.com/ceres-solver
+          cd ceres-solver
+          git checkout 2.1.0
+          cd ..
+          mkdir ceres-bin
+          cd ceres-bin
+          cmake ../ceres-solver
+          make -j3
+          # Optionally install Ceres, it can also be exported using CMake which
+          # allows Ceres to be used without requiring installation, see the
+          # documentation for the EXPORT_BUILD_DIR option for more information.
+          make install
 
       # Build and Install OpenCV library
       - name: Restore OpenCV cache
