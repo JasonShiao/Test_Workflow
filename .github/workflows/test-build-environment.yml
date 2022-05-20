@@ -60,7 +60,7 @@ jobs:
           brew install ffmpeg@4
           brew install glog
           brew install harfbuzz
-          brew install numpy
+          pip3 install numpy
           brew install protobuf
           brew install tbb
           brew install vtk
