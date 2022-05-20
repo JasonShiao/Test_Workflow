@@ -1,7 +1,7 @@
 name: build-macos-installer
 on:
   push:
-    tags:
+    branches:
       - "test-env"
 jobs:
   setup-macos-build-environment:
