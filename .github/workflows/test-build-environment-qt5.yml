@@ -50,7 +50,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          $RUNNER_WORKSPACE/Qt/5.15.2/macos/bin/qmake ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler
+          $RUNNER_WORKSPACE/Qt/5.15.2/clang_64/bin/qmake ${{ github.workspace }}/test/test.pro -spec macx-clang CONFIG+=qtquickcompiler
       - name: Compile (Build) project
         run: |
           cd build
