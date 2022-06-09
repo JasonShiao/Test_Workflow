@@ -38,7 +38,7 @@ jobs:
           cd build
           export MINGW64_PATH=/mingw64
           echo ${MINGW64_PATH}
-          qmake.exe -o Makefile ../test.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+          qmake.exe -o Makefile ../test/test.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
           #mingw32-make -j4
           make -j4
           ls
