@@ -14,10 +14,31 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           install: >-
+            mingw-w64-x86_64-potrace
             mingw-w64-x86_64-opencv
-        
+            mingw-w64-x86_64-boost
+            mingw-w64-x86_64-qt5
+            mingw-w64-x86_64-qt5-tools
+            mingw-w64-x86_64-libxml2
+            mingw-w64-x86_64-gcc
+            make
+            libxml2
+      
+      - name: Check Env
+        shell: msys2 {0}
+        run: |
+          echo $PATH
+          pwd
+          ls /mingw64
+
       - name: 
         shell: msys2 {0}
         run: |
-          ls /mingw64/include/opencv4
-          ls /mingw64/include/opencv4/opencv2
+          mkdir build
+          cd build
+          export MINGW64_PATH=/mingw64
+          echo ${MINGW64_PATH}
+          qmake.exe -o Makefile ../test.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
+          #mingw32-make -j4
+          make -j4
+          ls
