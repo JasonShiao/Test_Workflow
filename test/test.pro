@@ -6,7 +6,7 @@ TARGET = TestQt
 CONFIG += c++17
 
 win32 {
-    MINGW64_PATH=/mingw64
+    #set environment variable outside qmake: MINGW64_PATH=/mingw64
     message($$(MINGW64_PATH))
     # libxml2, potrace, boost, opencv
     LIBS += -L$$(MINGW64_PATH)/lib
