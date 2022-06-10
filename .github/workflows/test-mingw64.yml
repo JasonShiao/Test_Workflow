@@ -30,7 +30,15 @@ jobs:
           echo $PATH
           pwd
 
-      - name: 
+      - name: Set 3GB compile memory
+        shell: msys2 {0}
+        run: |
+          bcdedit /set IncreaseUserVa 3072
+          editbin /LARGEADDRESSAWARE /mingw64/bin/gcc.exe
+          editbin /LARGEADDRESSAWARE /mingw64/bin/g++.exe
+          editbin /LARGEADDRESSAWARE /mingw64/bin/cc.exe
+
+      - name: Build
         shell: msys2 {0}
         run: |
           mkdir build
