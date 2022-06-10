@@ -6,10 +6,10 @@ TARGET = TestQt
 CONFIG += c++17
 
 win32 {
-    MINGW64_PATH=/mingw64
-    message($${MINGW64_PATH})
+    #MINGW64_PATH=/mingw64
+    message($$(MINGW64_PATH))
     # libxml2, potrace, boost, opencv
-    LIBS += -L$${MINGW64_PATH}/lib
+    LIBS += -L$$(MINGW64_PATH)/lib
     # resolve __imp_WSAStartup & __imp_WSACleanup undefined issue
     LIBS += -lws2_32
     # resolve WinSock.h already included issue
@@ -31,9 +31,9 @@ message("LIBS:" $$LIBS)
 
 win32 {
     # boost, libxml2, potrace
-    INCLUDEPATH += $${MINGW64_PATH}/include
-    INCLUDEPATH += $${MINGW64_PATH}/include/libxml2
-    INCLUDEPATH += $${MINGW64_PATH}/include/opencv4
+    INCLUDEPATH += $$(MINGW64_PATH)/include
+    INCLUDEPATH += $$(MINGW64_PATH)/include/libxml2
+    INCLUDEPATH += $$(MINGW64_PATH)/include/opencv4
 }
 macx{
     INCLUDEPATH += /usr/local/include
