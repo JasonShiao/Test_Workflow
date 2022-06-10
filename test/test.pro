@@ -13,7 +13,7 @@ win32 {
     LIBS += -lws2_32
     # resolve WinSock.h already included issue
     DEFINES+=WIN32_LEAN_AND_MEAN
-    message($LIBS)
+    message("LIBS:" $LIBS)
 }
 macx{
     _BOOST_PATH = "/usr/local/Cellar/boost/1.78.0_1"
