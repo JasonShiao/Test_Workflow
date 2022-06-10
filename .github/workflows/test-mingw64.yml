@@ -29,21 +29,17 @@ jobs:
         run: |
           echo $PATH
           pwd
-          ls /mingw64
-          ls /mingw64/lib
-          ls /mingw64/include/opencv4
-          ls /mingw64/include/opencv4/opencv2
 
       - name: 
         shell: msys2 {0}
         run: |
           mkdir build
           cd build
-          export MINGW64_PATH=${{ runner.temp }}/msys64/mingw64
-          echo ${MINGW64_PATH}
           export PATH="/mingw64/bin:$PATH"
           echo $PATH
-          export LD_LIBRARY_PATH=/mingw64/lib
+          #export MINGW64_PATH=${{ runner.temp }}/msys64/mingw64
+          #echo ${MINGW64_PATH}
+          #export LIBRARY_PATH=/mingw64/lib
           qmake.exe -o Makefile ../test/test.pro -spec win32-g++ "CONFIG+=qtquickcompiler"
           #mingw32-make -j4
           make -j4
