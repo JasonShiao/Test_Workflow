@@ -6,12 +6,14 @@ TARGET = TestQt
 CONFIG += c++17
 
 win32 {
+    message($${MINGW64_PATH})
     # libxml2, potrace, boost, opencv
     LIBS += -L$${MINGW64_PATH}/lib
     # resolve __imp_WSAStartup & __imp_WSACleanup undefined issue
     LIBS += -lws2_32
     # resolve WinSock.h already included issue
     DEFINES+=WIN32_LEAN_AND_MEAN
+    message($LIBS)
 }
 macx{
     _BOOST_PATH = "/usr/local/Cellar/boost/1.78.0_1"
