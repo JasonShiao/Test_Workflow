@@ -32,7 +32,7 @@ jobs:
           ls /mingw64
           ls /mingw64/lib
           ls /mingw64/include/opencv4
-          ls /mingw64/include/opencv2
+          ls /mingw64/include/opencv4/opencv2
 
       - name: 
         shell: msys2 {0}
