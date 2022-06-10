@@ -6,6 +6,7 @@ TARGET = TestQt
 CONFIG += c++17
 
 win32 {
+    MINGW64_PATH=/mingw64
     message($${MINGW64_PATH})
     # libxml2, potrace, boost, opencv
     LIBS += -L$${MINGW64_PATH}/lib
@@ -13,7 +14,6 @@ win32 {
     LIBS += -lws2_32
     # resolve WinSock.h already included issue
     DEFINES+=WIN32_LEAN_AND_MEAN
-    message("LIBS:" $LIBS)
 }
 macx{
     _BOOST_PATH = "/usr/local/Cellar/boost/1.78.0_1"
@@ -27,6 +27,7 @@ LIBS += -lopencv_imgproc
 # OpenCV from Macport 
 LIBS += -lboost_thread-mt
 LIBS += -lboost_chrono-mt
+message("LIBS:" $$LIBS)
 
 win32 {
     # boost, libxml2, potrace
@@ -40,6 +41,7 @@ macx{
     INCLUDEPATH += /usr/local/opt/opencv/include/opencv4
     INCLUDEPATH += "$${_BOOST_PATH}/include/"
 }
+message("INCLUDEPATH:" $$INCLUDEPATH)
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
